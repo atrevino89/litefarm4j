@@ -1,5 +1,8 @@
 package org.litefarm.app.farm_management.domain;
 
+import org.litefarm.app.farm_management.domain.location.Location;
+
+import java.util.List;
 import java.util.UUID;
 
 // Aggregate root
@@ -38,6 +41,10 @@ public class Farm {
 
     public UUID getUuid() {
         return uuid;
+    }
+
+    public List<Location> createLocation() {
+        return List.of();
     }
 
     public static class Builder {
