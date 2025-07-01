@@ -2,6 +2,7 @@ package org.litefarm.app.farm_management.domain.coordinate;
 
 import org.litefarm.app.farm_management.domain.exception.BusinessRuleException;
 
+import java.util.Collections;
 import java.util.List;
 
 public class CoordinatePoint implements CoordinateProfile {
@@ -26,6 +27,6 @@ public class CoordinatePoint implements CoordinateProfile {
 
     @Override
     public List<Coordinate> getCoordinates() {
-        return List.of(coordinate);
+        return Collections.singletonList(this.coordinate);
     }
 }
