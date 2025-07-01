@@ -1,39 +1,31 @@
 package org.litefarm.app.farm_management.domain.location;
 
 import org.litefarm.app.farm_management.domain.Unit;
-import org.litefarm.app.farm_management.domain.coordinate.CoordinateProfile;
+import org.litefarm.app.farm_management.domain.coordinate.CoordinateArea;
+import org.litefarm.app.farm_management.domain.exception.BusinessRuleException;
 
-import java.util.UUID;
+public class Residence extends Location {
+    private double totalArea;
+    private Unit unit;
 
-public class Residence implements Location {
-    private UUID residenceUUID;
-    private String name, note;
-    private double totalArea = 0.00;
-    private CoordinateProfile coordinate;
-    private Unit unit = null;
+    public Residence(String name, String note, CoordinateArea coordinates, double totalArea, Unit unit) {
+        super(name, note, coordinates);
 
-    @Override
-    public void setName(String name) {
-        this.name = name;
+        if(totalArea <= 0) throw new BusinessRuleException("Total area has to be a positive number");
+        this.totalArea = totalArea;
+        this.unit = unit;
     }
 
-    @Override
-    public void setNote(String note) {
-        this.note = note;
-    }
-
-    @Override
-    public void setCoordinateProfile(CoordinateProfile coordinate) {
-        this.coordinate = coordinate;
-    }
-
-    @Override
-    public CoordinateProfile getCoordinateProfile() {
-        return this.coordinate;
+    public double getTotalArea() {
+        return totalArea;
     }
 
     public void setTotalArea(double totalArea) {
         this.totalArea = totalArea;
+    }
+
+    public Unit getUnit() {
+        return unit;
     }
 
     public void setUnit(Unit unit) {

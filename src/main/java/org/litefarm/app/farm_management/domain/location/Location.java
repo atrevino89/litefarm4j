@@ -2,12 +2,40 @@ package org.litefarm.app.farm_management.domain.location;
 
 import org.litefarm.app.farm_management.domain.coordinate.CoordinateProfile;
 
-public interface Location {
-    void setName(String name);
+import java.util.UUID;
 
-    void setNote(String note);
+public abstract class Location {
+    private UUID locationUUID;
+    private String name, note;
+    private CoordinateProfile coordinates;
 
-    void setCoordinateProfile(CoordinateProfile coordinate);
+    public Location(String name, String note, CoordinateProfile coordinates) {
+        this.name = name;
+        this.note = note;
+        this.coordinates = coordinates;
+    }
 
-    CoordinateProfile getCoordinateProfile();
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public void setCoordinates(CoordinateProfile coordinates) {
+        this.coordinates = coordinates;
+    }
+
+    CoordinateProfile getCoordinates() {
+        return this.coordinates;
+    }
+
+    public UUID getLocationUUID() {
+        return locationUUID;
+    }
+
+    public void setLocationUUID(UUID locationUUID) {
+        this.locationUUID = locationUUID;
+    }
 }

@@ -1,5 +1,7 @@
 package org.litefarm.app.farm_management.domain.location;
 
+import org.litefarm.app.farm_management.domain.exception.BusinessRuleException;
+
 public class LocationFactory {
     public static Location createLocation(LocationType locationType) {
         return switch (locationType) {
@@ -10,7 +12,7 @@ public class LocationFactory {
             case GARDEN -> null;
             case GREENHOUSE -> null;
             case NATURAL_AREA -> null;
-            case RESIDENCE -> new Residence();
+            case RESIDENCE -> null;
             case SURFACE_WATER -> null;
             case BUFFER_ZONE -> null;
             case FENCE -> null;
