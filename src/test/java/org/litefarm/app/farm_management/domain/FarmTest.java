@@ -3,6 +3,8 @@ package org.litefarm.app.farm_management.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.litefarm.app.farm_management.domain.location.Location;
+import org.litefarm.app.farm_management.domain.location.LocationFactory;
+import org.litefarm.app.farm_management.domain.location.LocationType;
 
 import java.util.List;
 import java.util.UUID;
@@ -25,7 +27,11 @@ public class FarmTest {
         this.uuid = UUID.randomUUID();
         this.name = "San Miguel Farm";
         this.phoneNumber = "+598 12345678";
-        this.locationList = List.of(new Location(), new Location(), new Location());
+        Location location = LocationFactory.createLocation(LocationType.RESIDENCE);
+        location.setName("Test location - Residence");
+        location.setNote("No long note");
+        //location.setCoordinate();
+        //this.locationList = List.of(new Location(), new Location(), new Location());
         this.address = "Montemorelos, Pilares, 65515 Los Pilares, N.L., Mexico";
         this.units = "meters";
         this.currency = "USD";
@@ -39,7 +45,7 @@ public class FarmTest {
                 .uuid(this.uuid)
                 .name(this.name)
                 .phoneNumber(this.phoneNumber)
-                .location(this.locationList)
+                //.location(this.locationList)
                 .address(this.address)
                 .units(this.units)
                 .currency(this.currency)
@@ -56,7 +62,7 @@ public class FarmTest {
                     .uuid(this.uuid)
                     //.name(this.name)
                     .phoneNumber(this.phoneNumber)
-                    .location(this.locationList)
+                    //.location(this.locationList)
                     .address(this.address)
                     .units(this.units)
                     .currency(this.currency)
@@ -72,7 +78,7 @@ public class FarmTest {
                     .uuid(this.uuid)
                     .name(this.name)
                     //.phoneNumber(this.phoneNumber)
-                    .location(this.locationList)
+                    //.location(this.locationList)
                     .address(this.address)
                     .units(this.units)
                     .currency(this.currency)
@@ -104,7 +110,7 @@ public class FarmTest {
                     .uuid(this.uuid)
                     .name(this.name)
                     .phoneNumber(this.phoneNumber)
-                    .location(this.locationList)
+                    //.location(this.locationList)
                     //.address(this.address)
                     .units(this.units)
                     .currency(this.currency)
@@ -120,7 +126,7 @@ public class FarmTest {
                     .uuid(this.uuid)
                     .name(this.name)
                     .phoneNumber(this.phoneNumber)
-                    .location(this.locationList)
+                    //.location(this.locationList)
                     .address(this.address)
                     //.units(this.units)
                     .currency(this.currency)
@@ -136,7 +142,7 @@ public class FarmTest {
                     .uuid(this.uuid)
                     .name(this.name)
                     .phoneNumber(this.phoneNumber)
-                    .location(this.locationList)
+                    //.location(this.locationList)
                     .address(this.address)
                     .units(this.units)
                     //.currency(this.currency)
@@ -152,7 +158,7 @@ public class FarmTest {
                     .uuid(this.uuid)
                     .name(this.name)
                     .phoneNumber(this.phoneNumber)
-                    .location(this.locationList)
+                    //.location(this.locationList)
                     .address(this.address)
                     .units(this.units)
                     .currency(this.currency)
