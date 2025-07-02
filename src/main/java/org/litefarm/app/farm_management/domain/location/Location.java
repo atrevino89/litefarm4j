@@ -5,37 +5,32 @@ import org.litefarm.app.farm_management.domain.coordinate.CoordinateProfile;
 import java.util.UUID;
 
 public abstract class Location {
-    private UUID locationUUID;
-    private String name, note;
-    private CoordinateProfile coordinates;
+    private final UUID locationUUID;
+    private final String name;
+    private final String note;
+    private final CoordinateProfile coordinates;
 
-    public Location(String name, String note, CoordinateProfile coordinates) {
+    public Location(UUID locationUUID, String name, String note, CoordinateProfile coordinates) {
+        this.locationUUID = locationUUID;
         this.name = name;
         this.note = note;
         this.coordinates = coordinates;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
-    }
-
-    public void setCoordinates(CoordinateProfile coordinates) {
-        this.coordinates = coordinates;
-    }
-
-    CoordinateProfile getCoordinates() {
+    public CoordinateProfile getCoordinates() {
         return this.coordinates;
     }
 
     public UUID getLocationUUID() {
-        return locationUUID;
+        return this.locationUUID;
     }
 
-    public void setLocationUUID(UUID locationUUID) {
-        this.locationUUID = locationUUID;
+
+    public String getName() {
+        return name;
+    }
+
+    public String getNote() {
+        return note;
     }
 }

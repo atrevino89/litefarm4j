@@ -28,8 +28,8 @@ public class FarmTest {
         this.name = "San Miguel Farm";
         this.phoneNumber = "+598 12345678";
         Location location = LocationFactory.createLocation(LocationType.RESIDENCE);
-        location.setName("Test location - Residence");
-        location.setNote("No long note");
+        //location.setName("Test location - Residence");
+        //location.setNote("No long note");
         //location.setCoordinate();
         //this.locationList = List.of(new Location(), new Location(), new Location());
         this.address = "Montemorelos, Pilares, 65515 Los Pilares, N.L., Mexico";
