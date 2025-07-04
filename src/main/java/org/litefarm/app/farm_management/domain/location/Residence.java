@@ -8,15 +8,14 @@ import org.litefarm.app.farm_management.domain.exception.BusinessRuleException;
 import java.util.Optional;
 import java.util.UUID;
 
-public class Residence extends Location {
-    private final double totalArea;
+public class Residence extends LocationArea {
     private final Unit unit;
 
-    private Residence(UUID uuid, String name, String note, CoordinateProfile coordinates, Double totalArea, Unit unit) {
+    private Residence(UUID uuid, String name, String note, CoordinateProfile coordinates, TotalArea area, Unit unit) {
         super(uuid, name, note, coordinates);
 
-        if (totalArea <= 0) throw new BusinessRuleException("Total area has to be a positive number");
-        this.totalArea = totalArea;
+        if (area.totalArea() <= 0) throw new BusinessRuleException("Total area has to be a positive number");
+        this.setTotalArea(area);
         this.unit = unit;
     }
 
@@ -42,9 +41,6 @@ public class Residence extends Location {
         );
     }
 
-    public double getTotalArea() {
-        return totalArea;
-    }
 
     public Unit getUnit() {
         return unit;

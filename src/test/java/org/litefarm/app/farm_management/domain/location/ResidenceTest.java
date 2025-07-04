@@ -14,7 +14,7 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ResidenceTest {
-    Double totalArea = 123.5;
+    TotalArea totalArea;
     CoordinateArea coordinates;
     Unit squareMeter;
     Unit acres;
@@ -24,6 +24,7 @@ public class ResidenceTest {
 
     @BeforeEach
     void init() {
+        this.totalArea = new TotalArea(123.4);
         this.coordinates = new CoordinateArea(List.of(
                 new Coordinate(70.23, 83.3),
                 new Coordinate(70.25, 83.3),
@@ -60,15 +61,16 @@ public class ResidenceTest {
 
     @Test
     void givenResidenceWithZeroTotalArea_whenConsumerCreatesAResidence_thenThrowBusinessRuleException() {
-        var residenceIngressData = new ResidenceIngressData(
-                UUID.randomUUID(),
-                "Residencia Trevino",
-                "Long note in here, lotem ipsum dolorum",
-                this.coordinates,
-                0.00,
-                this.squareMeter
-        );
-        assertThrows(BusinessRuleException.class, () -> Residence.of(residenceIngressData)
+        assertThrows(BusinessRuleException.class, () -> {
+                    new ResidenceIngressData(
+                            UUID.randomUUID(),
+                            "Residencia Trevino",
+                            "Long note in here, lotem ipsum dolorum",
+                            this.coordinates,
+                            new TotalArea(0.00),
+                            this.squareMeter
+                    );
+                }
         );
     }
 
@@ -86,7 +88,7 @@ public class ResidenceTest {
                 "Alameda disco",
                 "Updated note",
                 newCoordinates,
-                10.00,
+                new TotalArea(10.00),
                 this.squareMeter
         );
 

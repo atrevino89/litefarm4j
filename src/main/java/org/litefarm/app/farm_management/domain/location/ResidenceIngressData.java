@@ -10,6 +10,6 @@ public record ResidenceIngressData(
         String name,
         String note,
         CoordinateArea coordinates,
-        Double totalArea,
+        TotalArea totalArea,
         Unit unit) {
 }
