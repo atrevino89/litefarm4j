@@ -14,32 +14,28 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ResidenceTest {
-    TotalArea totalArea;
-    CoordinateArea coordinates;
-    Unit squareMeter;
-    Unit acres;
+    private TotalArea totalArea;
+    private CoordinateArea coordinates;
 
     private ResidenceIngressData residenceIngressData;
     private Residence oldResidence;
 
     @BeforeEach
     void init() {
-        this.totalArea = new TotalArea(123.4);
+        this.totalArea = new TotalArea(123.4, Unit.SQUARE_METERS);
         this.coordinates = new CoordinateArea(List.of(
                 new Coordinate(70.23, 83.3),
                 new Coordinate(70.25, 83.3),
                 new Coordinate(70.26, 83.3)
         ));
-        this.squareMeter = Unit.SQUARE_METERS;
-        this.acres = Unit.ACRES;
+        var acres = Unit.ACRES;
 
         this.residenceIngressData = new ResidenceIngressData(
                 UUID.randomUUID(),
                 "Residencia Trevino",
                 "Long note in here, lotem ipsum dolorum",
                 this.coordinates,
-                this.totalArea,
-                this.squareMeter
+                this.totalArea
         );
 
         this.oldResidence = Residence.of(
@@ -55,8 +51,8 @@ public class ResidenceTest {
 
 
         Assertions.assertNotNull(residence);
-        assertEquals(this.totalArea, residence.getTotalArea());
-        assertEquals(this.squareMeter, residence.getUnit());
+        assertEquals(this.totalArea.value(), residence.getTotalArea().value());
+        assertEquals(this.totalArea.unit(), residence.getTotalArea().unit());
     }
 
     @Test
@@ -73,8 +69,7 @@ public class ResidenceTest {
                 "Alameda disco",
                 "Updated note",
                 newCoordinates,
-                new TotalArea(10.00),
-                this.squareMeter
+                new TotalArea(10.00, Unit.ACRES)
         );
 
         var newResidence = oldResidence.update(newResidenceData);
@@ -84,7 +79,6 @@ public class ResidenceTest {
         assertEquals(newResidenceData.note(), newResidence.getNote());
         assertEquals(newResidenceData.coordinates(), newResidence.getCoordinates());
         assertEquals(newResidenceData.totalArea(), newResidence.getTotalArea());
-        assertEquals(newResidenceData.unit(), newResidence.getUnit());
     }
 
     @Test
@@ -95,8 +89,7 @@ public class ResidenceTest {
                 "Alameda disco",
                 "Updated note",
                 null,
-                null,
-                this.squareMeter
+                null
         );
 
         var newResidence = oldResidence.update(newResidenceData);
@@ -106,10 +99,11 @@ public class ResidenceTest {
         assertNotEquals(newRandomUUID, newResidence.getLocationUUID());
         assertEquals(oldResidence.getCoordinates(), newResidence.getCoordinates());
         assertEquals(oldResidence.getTotalArea(), newResidence.getTotalArea());
+        assertEquals(oldResidence.getTotalArea(), newResidence.getTotalArea());
 
         // validating updated values
         assertEquals(newResidenceData.name(), newResidence.getName());
         assertEquals(newResidenceData.note(), newResidence.getNote());
-        assertEquals(newResidenceData.unit(), newResidence.getUnit());
+
     }
 }

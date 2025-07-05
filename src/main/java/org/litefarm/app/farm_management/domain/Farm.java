@@ -1,16 +1,16 @@
 package org.litefarm.app.farm_management.domain;
 
-import org.litefarm.app.farm_management.domain.location.Location;
+import org.litefarm.app.farm_management.domain.exception.BusinessRuleException;
 
 import java.util.List;
 import java.util.UUID;
 
 // Aggregate root
 public class Farm {
-    private final UUID uuid;
+    private final UUID farmUUID;
     private final String name;
     private final String phoneNumber;
-    private final String location;
+    private final List<UUID> locations;
     private final String address;
     private final String units;
     private final String currency;
@@ -18,47 +18,42 @@ public class Farm {
 
     private Farm(Builder builder) {
         String exceptionMessage = "Farm %s is required";
-        if (builder.uuid == null) throw new IllegalArgumentException(String.format(exceptionMessage, "uuid"));
+        if (builder.farmUUID == null) throw new BusinessRuleException(String.format(exceptionMessage, "uuid"));
         if (builder.name == null || builder.name.isBlank())
-            throw new IllegalArgumentException(String.format(exceptionMessage, "name"));
+            throw new BusinessRuleException(String.format(exceptionMessage, "name"));
         if (builder.phoneNumber == null)
-            throw new IllegalArgumentException(String.format(exceptionMessage, "phone number"));
-        if (builder.location == null) throw new IllegalArgumentException(String.format(exceptionMessage, "location"));
-        if (builder.address == null) throw new IllegalArgumentException(String.format(exceptionMessage, "address"));
-        if (builder.units == null) throw new IllegalArgumentException(String.format(exceptionMessage, "units"));
-        if (builder.currency == null) throw new IllegalArgumentException(String.format(exceptionMessage, "currency"));
-        if (builder.image == null) throw new IllegalArgumentException(String.format(exceptionMessage, "image"));
+            throw new BusinessRuleException(String.format(exceptionMessage, "phone number"));
+        if (builder.address == null) throw new BusinessRuleException(String.format(exceptionMessage, "address"));
+        if (builder.units == null) throw new BusinessRuleException(String.format(exceptionMessage, "units"));
+        if (builder.currency == null) throw new BusinessRuleException(String.format(exceptionMessage, "currency"));
+        if (builder.image == null) throw new BusinessRuleException(String.format(exceptionMessage, "image"));
 
-        this.uuid = builder.uuid;
+        this.farmUUID = builder.farmUUID;
         this.name = builder.name;
         this.phoneNumber = builder.phoneNumber;
-        this.location = builder.location;
+        this.locations = builder.locations;
         this.address = builder.address;
         this.units = builder.units;
         this.currency = builder.currency;
         this.image = builder.image;
     }
 
-    public UUID getUuid() {
-        return uuid;
-    }
-
-    public List<Location> createLocation() {
-        return List.of();
+    public List<UUID> getLocations() {
+        return locations;
     }
 
     public static class Builder {
-        private UUID uuid;
+        private UUID farmUUID;
         private String name;
         private String phoneNumber;
-        private String location;
+        private List<UUID> locations;
         private String address;
         private String units;
         private String currency;
         private String image;
 
         public Builder uuid(UUID uuid) {
-            this.uuid = uuid;
+            this.farmUUID = uuid;
             return this;
         }
 
@@ -73,8 +68,8 @@ public class Farm {
 
         }
 
-        public Builder location(String location) {
-            this.location = location;
+        public Builder locations(List<UUID> locations) {
+            this.locations = locations;
             return this;
         }
 

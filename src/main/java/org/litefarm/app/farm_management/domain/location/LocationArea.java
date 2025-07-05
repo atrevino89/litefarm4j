@@ -8,15 +8,13 @@ import java.util.UUID;
 public abstract class LocationArea extends Location {
     private TotalArea totalArea;
 
-    public LocationArea(UUID locationUUID, String name, String note, CoordinateProfile coordinates) {
+    public LocationArea(UUID locationUUID, String name, String note, CoordinateProfile coordinates, TotalArea area) {
         super(locationUUID, name, note, coordinates);
+
+        this.totalArea = area;
     }
 
     public TotalArea getTotalArea() {
-        return totalArea;
-    }
-
-    public void setTotalArea(TotalArea totalArea) {
-        this.totalArea = totalArea;
+        return this.totalArea;
     }
 }

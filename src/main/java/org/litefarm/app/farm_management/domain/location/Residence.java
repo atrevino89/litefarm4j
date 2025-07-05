@@ -3,19 +3,20 @@ package org.litefarm.app.farm_management.domain.location;
 import org.litefarm.app.farm_management.domain.Unit;
 import org.litefarm.app.farm_management.domain.coordinate.CoordinateArea;
 import org.litefarm.app.farm_management.domain.coordinate.CoordinateProfile;
-import org.litefarm.app.farm_management.domain.exception.BusinessRuleException;
 
 import java.util.Optional;
 import java.util.UUID;
 
 public class Residence extends LocationArea {
-    private final Unit unit;
 
-    private Residence(UUID uuid, String name, String note, CoordinateProfile coordinates, TotalArea area, Unit unit) {
-        super(uuid, name, note, coordinates);
-
-        this.setTotalArea(area);
-        this.unit = unit;
+    private Residence(
+            UUID uuid,
+            String name,
+            String note,
+            CoordinateProfile coordinates,
+            TotalArea area
+    ) {
+        super(uuid, name, note, coordinates, area);
     }
 
     public static Residence of(ResidenceIngressData data) {
@@ -24,8 +25,7 @@ public class Residence extends LocationArea {
                 data.name(),
                 data.note(),
                 data.coordinates(),
-                data.totalArea(),
-                data.unit()
+                data.totalArea()
         );
     }
 
@@ -35,13 +35,7 @@ public class Residence extends LocationArea {
                 Optional.ofNullable(d.name()).orElse(this.getName()),
                 Optional.ofNullable(d.note()).orElse(this.getNote()),
                 Optional.ofNullable(d.coordinates()).orElse((CoordinateArea) this.getCoordinates()),
-                Optional.ofNullable(d.totalArea()).orElse(this.getTotalArea()),
-                Optional.ofNullable(d.unit()).orElse(this.getUnit())
+                Optional.ofNullable(d.totalArea()).orElse(this.getTotalArea())
         );
-    }
-
-
-    public Unit getUnit() {
-        return unit;
     }
 }
