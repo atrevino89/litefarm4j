@@ -1,4 +1,4 @@
-package org.litefarm.app.farm_management.domain;
+package org.litefarm.app.farm_management.domain.farm;
 
 import org.litefarm.app.farm_management.domain.exception.BusinessRuleException;
 
@@ -7,7 +7,7 @@ import java.util.UUID;
 
 // Aggregate root
 public class Farm {
-    private final UUID farmUUID;
+    private final FarmId farmId;
     private final String name;
     private final String phoneNumber;
     private final List<UUID> locations;
@@ -18,7 +18,7 @@ public class Farm {
 
     private Farm(Builder builder) {
         String exceptionMessage = "Farm %s is required";
-        if (builder.farmUUID == null) throw new BusinessRuleException(String.format(exceptionMessage, "uuid"));
+        if (builder.farmId == null) throw new BusinessRuleException(String.format(exceptionMessage, "uuid"));
         if (builder.name == null || builder.name.isBlank())
             throw new BusinessRuleException(String.format(exceptionMessage, "name"));
         if (builder.phoneNumber == null)
@@ -28,7 +28,7 @@ public class Farm {
         if (builder.currency == null) throw new BusinessRuleException(String.format(exceptionMessage, "currency"));
         if (builder.image == null) throw new BusinessRuleException(String.format(exceptionMessage, "image"));
 
-        this.farmUUID = builder.farmUUID;
+        this.farmId = builder.farmId;
         this.name = builder.name;
         this.phoneNumber = builder.phoneNumber;
         this.locations = builder.locations;
@@ -43,7 +43,7 @@ public class Farm {
     }
 
     public static class Builder {
-        private UUID farmUUID;
+        private FarmId farmId;
         private String name;
         private String phoneNumber;
         private List<UUID> locations;
@@ -52,8 +52,8 @@ public class Farm {
         private String currency;
         private String image;
 
-        public Builder uuid(UUID uuid) {
-            this.farmUUID = uuid;
+        public Builder farmId(FarmId farmId) {
+            this.farmId = farmId;
             return this;
         }
 
