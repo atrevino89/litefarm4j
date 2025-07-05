@@ -14,7 +14,6 @@ public class Residence extends LocationArea {
     private Residence(UUID uuid, String name, String note, CoordinateProfile coordinates, TotalArea area, Unit unit) {
         super(uuid, name, note, coordinates);
 
-        if (area.totalArea() <= 0) throw new BusinessRuleException("Total area has to be a positive number");
         this.setTotalArea(area);
         this.unit = unit;
     }

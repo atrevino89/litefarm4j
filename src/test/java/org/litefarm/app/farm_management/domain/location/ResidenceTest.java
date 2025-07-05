@@ -60,21 +60,6 @@ public class ResidenceTest {
     }
 
     @Test
-    void givenResidenceWithZeroTotalArea_whenConsumerCreatesAResidence_thenThrowBusinessRuleException() {
-        assertThrows(BusinessRuleException.class, () -> {
-                    new ResidenceIngressData(
-                            UUID.randomUUID(),
-                            "Residencia Trevino",
-                            "Long note in here, lotem ipsum dolorum",
-                            this.coordinates,
-                            new TotalArea(0.00),
-                            this.squareMeter
-                    );
-                }
-        );
-    }
-
-    @Test
     void givenResidenceValidInformation_whenUpdatingAResidence_thenUpdatedResidenceIsCreated() {
         var newCoordinates = new CoordinateArea(List.of(
                 new Coordinate(70.23, 83.3),
