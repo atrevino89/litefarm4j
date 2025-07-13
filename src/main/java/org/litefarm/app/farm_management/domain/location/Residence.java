@@ -19,13 +19,14 @@ public class Residence extends LocationArea {
         super(uuid, name, note, coordinates, area);
     }
 
-    public static Residence of(ResidenceIngressData data) {
+    public static Residence of(BaseLocationIngressData baseData) {
+        var residenceData = (ResidenceIngressData) baseData;
         return new Residence(
-                data.locationUUID(),
-                data.name(),
-                data.note(),
-                data.coordinates(),
-                data.totalArea()
+                residenceData.locationUUID(),
+                residenceData.name(),
+                residenceData.note(),
+                residenceData.coordinates(),
+                residenceData.totalArea()
         );
     }
 

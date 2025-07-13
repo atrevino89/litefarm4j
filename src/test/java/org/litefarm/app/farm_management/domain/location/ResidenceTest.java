@@ -6,12 +6,12 @@ import org.junit.jupiter.api.Test;
 import org.litefarm.app.farm_management.domain.Unit;
 import org.litefarm.app.farm_management.domain.coordinate.Coordinate;
 import org.litefarm.app.farm_management.domain.coordinate.CoordinateArea;
-import org.litefarm.app.farm_management.domain.exception.BusinessRuleException;
 
 import java.util.List;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class ResidenceTest {
     private TotalArea totalArea;
@@ -35,7 +35,8 @@ public class ResidenceTest {
                 "Residencia Trevino",
                 "Long note in here, lotem ipsum dolorum",
                 this.coordinates,
-                this.totalArea
+                this.totalArea,
+                LocationType.RESIDENCE
         );
 
         this.oldResidence = Residence.of(
@@ -69,7 +70,8 @@ public class ResidenceTest {
                 "Alameda disco",
                 "Updated note",
                 newCoordinates,
-                new TotalArea(10.00, Unit.ACRES)
+                new TotalArea(10.00, Unit.ACRES),
+                LocationType.RESIDENCE
         );
 
         var newResidence = oldResidence.update(newResidenceData);
@@ -89,7 +91,8 @@ public class ResidenceTest {
                 "Alameda disco",
                 "Updated note",
                 null,
-                null
+                null,
+                LocationType.RESIDENCE
         );
 
         var newResidence = oldResidence.update(newResidenceData);

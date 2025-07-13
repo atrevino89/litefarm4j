@@ -1,8 +1,13 @@
 package org.litefarm.app.farm_management.domain.farm;
 
 import org.litefarm.app.farm_management.domain.exception.BusinessRuleException;
+import org.litefarm.app.farm_management.domain.location.BaseLocationIngressData;
+import org.litefarm.app.farm_management.domain.location.Location;
+import org.litefarm.app.farm_management.domain.location.LocationFactory;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 // Aggregate root
@@ -10,11 +15,11 @@ public class Farm {
     private final FarmId farmId;
     private final String name;
     private final String phoneNumber;
-    private final List<UUID> locations;
     private final String address;
     private final String units;
     private final String currency;
     private final String image;
+    private final ArrayList<UUID> locations;
 
     private Farm(Builder builder) {
         String exceptionMessage = "Farm %s is required";
@@ -31,7 +36,7 @@ public class Farm {
         this.farmId = builder.farmId;
         this.name = builder.name;
         this.phoneNumber = builder.phoneNumber;
-        this.locations = builder.locations;
+        this.locations = Optional.ofNullable(builder.locations).orElse(new ArrayList<>());
         this.address = builder.address;
         this.units = builder.units;
         this.currency = builder.currency;
@@ -42,11 +47,17 @@ public class Farm {
         return locations;
     }
 
+    public Location createLocation(BaseLocationIngressData ingressData) {
+        var location = LocationFactory.createLocation(ingressData);
+        this.locations.add(location.getLocationUUID());
+        return location;
+    }
+
     public static class Builder {
         private FarmId farmId;
         private String name;
         private String phoneNumber;
-        private List<UUID> locations;
+        private ArrayList<UUID> locations;
         private String address;
         private String units;
         private String currency;
@@ -68,7 +79,7 @@ public class Farm {
 
         }
 
-        public Builder locations(List<UUID> locations) {
+        public Builder locations(ArrayList<UUID> locations) {
             this.locations = locations;
             return this;
         }
