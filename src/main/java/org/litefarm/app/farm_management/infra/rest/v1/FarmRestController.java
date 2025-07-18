@@ -25,17 +25,19 @@ public class FarmRestController {
     }
 
 
-    public static record FarmCreationRequest (
+    public record FarmCreationRequest(
             @NotBlank String name,
             String note,
             String coordinates,
             String units
-    ) {}
+    ) {
+    }
 
-    public static record FarmCreationResponse (
+    public record FarmCreationResponse(
             String name,
             String note,
             String coordinates,
             String units
-    ) {}
+    ) {
+    }
 }
