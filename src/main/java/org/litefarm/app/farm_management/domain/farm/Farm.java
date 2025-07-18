@@ -53,6 +53,16 @@ public class Farm {
         return location;
     }
 
+    public Location updateLocationByUUID(UUID uuid, BaseLocationIngressData location) {
+        var updatedLocation = this.createLocation(location);
+
+        UUID[] updatedUUIDs = this.locations.stream()
+                .map(id -> id.equals(uuid) ? updatedLocation.getLocationUUID() : id)
+                .toArray(UUID[]::new);
+
+        return updatedLocation;
+    }
+
     public static class Builder {
         private FarmId farmId;
         private String name;

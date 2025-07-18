@@ -248,5 +248,52 @@ public class FarmTest {
         Assertions.assertEquals(location2.getLocationUUID(), farm.getLocations().get(1));
         Assertions.assertEquals(location3.getLocationUUID(), farm.getLocations().get(2));
     }
+
+
+    @Test
+    void givenANewFarm_whenUpdatingALocation_thenFarmGetsUpdatesWithAllLocationIDs() {
+        var farm = new Farm.Builder()
+                .farmId(this.farmId)
+                .name(this.name)
+                .phoneNumber(this.phoneNumber)
+                .address(this.address)
+                .units(this.units)
+                .currency(this.currency)
+                .image(this.image)
+                .build();
+
+
+        var location = farm.createLocation(this.residenceIngressData);
+
+        var rid2 = new ResidenceIngressData(
+                UUID.randomUUID(),
+                "Test House",
+                "Long note in here, lotem ipsum dolorum",
+                new CoordinateArea(List.of(
+                        new Coordinate(70.23, 83.3),
+                        new Coordinate(70.25, 83.3),
+                        new Coordinate(70.26, 83.3))),
+                new TotalArea(123.4, Unit.SQUARE_METERS),
+                LocationType.RESIDENCE
+        );
+
+        var location2 = farm.createLocation(rid2);
+
+        var rid3 = new ResidenceIngressData(
+                UUID.randomUUID(),
+                "Test House3",
+                "Long note in here, lotem ipsum dolorum",
+                new CoordinateArea(List.of(
+                        new Coordinate(70.23, 83.3),
+                        new Coordinate(70.25, 83.3),
+                        new Coordinate(70.26, 83.3))),
+                new TotalArea(123.4, Unit.SQUARE_METERS),
+                LocationType.RESIDENCE
+        );
+        var location3 = farm.createLocation(rid3);
+        Assertions.assertEquals(location.getLocationUUID(), farm.getLocations().get(0));
+        Assertions.assertEquals(location2.getLocationUUID(), farm.getLocations().get(1));
+        Assertions.assertEquals(location3.getLocationUUID(), farm.getLocations().get(2));
+    }
 }
 
