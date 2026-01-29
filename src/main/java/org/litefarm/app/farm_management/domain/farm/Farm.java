@@ -4,6 +4,7 @@ import org.litefarm.app.farm_management.domain.exception.BusinessRuleException;
 import org.litefarm.app.farm_management.domain.location.BaseLocationIngressData;
 import org.litefarm.app.farm_management.domain.location.Location;
 import org.litefarm.app.farm_management.domain.location.LocationFactory;
+import org.litefarm.app.kernel.domain.AggregateRoot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,11 +12,26 @@ import java.util.Optional;
 import java.util.UUID;
 
 // Aggregate root
-public class Farm {
+public class Farm implements AggregateRoot {
     private final FarmId farmId;
     private final String name;
     private final String phoneNumber;
     private final String address;
+
+    @Override
+    public String toString() {
+        return "Farm{" +
+                "farmId=" + farmId +
+                ", name='" + name + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", address='" + address + '\'' +
+                ", units='" + units + '\'' +
+                ", currency='" + currency + '\'' +
+                ", image='" + image + '\'' +
+                ", locations=" + locations +
+                '}';
+    }
+
     private final String units;
     private final String currency;
     private final String image;
@@ -43,6 +59,9 @@ public class Farm {
         this.image = builder.image;
     }
 
+    public FarmId getFarmId() {
+        return this.farmId;
+    }
     public List<UUID> getLocations() {
         return locations;
     }
